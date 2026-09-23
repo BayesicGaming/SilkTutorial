@@ -1,0 +1,46 @@
+[gd_scene load_steps=6 format=3]
+[ext_resource type="Script" path="res://rooms/room.gd" id="1"]
+[ext_resource type="PackedScene" path="res://rooms/platform.tscn" id="2"]
+[ext_resource type="PackedScene" path="res://player/player.tscn" id="3"]
+[ext_resource type="PackedScene" path="res://enemies/guard.tscn" id="4"]
+[ext_resource type="PackedScene" path="res://interactables/room_exit.tscn" id="5"]
+[node name="Room1" type="Node2D"]
+script = ExtResource("1")
+room_title = "01 / THE THRESHOLD"
+room_hint = "Hold jump to rise higher. Release for a short hop. Strike, then move."
+room_color = Color(0.12, 0.28, 0.32, 1)
+[node name="Geometry" type="Node2D" parent="."]
+[node name="Floor" parent="Geometry" instance=ExtResource("2")]
+position = Vector2(0, 740)
+size = Vector2(1440, 70)
+[node name="LeftWall" parent="Geometry" instance=ExtResource("2")]
+position = Vector2(-40, 0)
+size = Vector2(40, 810)
+[node name="RightWall" parent="Geometry" instance=ExtResource("2")]
+position = Vector2(1440, 0)
+size = Vector2(40, 810)
+[node name="Ledge1" parent="Geometry" instance=ExtResource("2")]
+position = Vector2(310, 650)
+size = Vector2(180, 24)
+[node name="Ledge2" parent="Geometry" instance=ExtResource("2")]
+position = Vector2(600, 590)
+size = Vector2(170, 24)
+[node name="Ledge3" parent="Geometry" instance=ExtResource("2")]
+position = Vector2(850, 650)
+size = Vector2(180, 24)
+[node name="Spawns" type="Node2D" parent="."]
+[node name="Entrance" type="Marker2D" parent="Spawns"]
+position = Vector2(160, 740)
+[node name="Return" type="Marker2D" parent="Spawns"]
+position = Vector2(1230, 740)
+[node name="Player" parent="." instance=ExtResource("3")]
+position = Vector2(160, 740)
+[node name="Enemies" type="Node2D" parent="."]
+[node name="Guard1" parent="Enemies" instance=ExtResource("4")]
+position = Vector2(800, 740)
+[node name="Exits" type="Node2D" parent="."]
+[node name="Forward" parent="Exits" instance=ExtResource("5")]
+position = Vector2(1390, 690)
+destination = 1
+spawn_name = &"Entrance"
+direction = 1.0

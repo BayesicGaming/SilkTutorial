@@ -1,0 +1,61 @@
+[gd_scene load_steps=6 format=3]
+[ext_resource type="Script" path="res://rooms/room.gd" id="1"]
+[ext_resource type="PackedScene" path="res://rooms/platform.tscn" id="2"]
+[ext_resource type="PackedScene" path="res://player/player.tscn" id="3"]
+[ext_resource type="PackedScene" path="res://enemies/guard.tscn" id="4"]
+[ext_resource type="PackedScene" path="res://interactables/room_exit.tscn" id="5"]
+[node name="Room2" type="Node2D"]
+script = ExtResource("1")
+room_title = "02 / THE CROSSROADS"
+room_hint = "Down: the Lantern Well and key. Right: the sealed gate. Jump across the opening to continue right."
+room_color = Color(0.24, 0.23, 0.37, 1)
+[node name="Geometry" type="Node2D" parent="."]
+[node name="FloorLeft" parent="Geometry" instance=ExtResource("2")]
+position = Vector2(0, 740)
+size = Vector2(650, 70)
+[node name="FloorRight" parent="Geometry" instance=ExtResource("2")]
+position = Vector2(810, 740)
+size = Vector2(630, 70)
+[node name="LeftWall" parent="Geometry" instance=ExtResource("2")]
+position = Vector2(-40, 0)
+size = Vector2(40, 810)
+[node name="RightWall" parent="Geometry" instance=ExtResource("2")]
+position = Vector2(1440, 0)
+size = Vector2(40, 810)
+[node name="Ledge1" parent="Geometry" instance=ExtResource("2")]
+position = Vector2(310, 650)
+size = Vector2(180, 24)
+[node name="Ledge2" parent="Geometry" instance=ExtResource("2")]
+position = Vector2(970, 650)
+size = Vector2(180, 24)
+[node name="Spawns" type="Node2D" parent="."]
+[node name="Entrance" type="Marker2D" parent="Spawns"]
+position = Vector2(160, 740)
+[node name="Return" type="Marker2D" parent="Spawns"]
+position = Vector2(1230, 740)
+[node name="FromWell" type="Marker2D" parent="Spawns"]
+position = Vector2(860, 740)
+[node name="Player" parent="." instance=ExtResource("3")]
+position = Vector2(160, 740)
+[node name="Enemies" type="Node2D" parent="."]
+[node name="Guard1" parent="Enemies" instance=ExtResource("4")]
+position = Vector2(560, 740)
+[node name="Guard2" parent="Enemies" instance=ExtResource("4")]
+position = Vector2(1130, 740)
+[node name="Exits" type="Node2D" parent="."]
+[node name="Back" parent="Exits" instance=ExtResource("5")]
+position = Vector2(45, 690)
+destination = 0
+spawn_name = &"Return"
+direction = -1.0
+[node name="Forward" parent="Exits" instance=ExtResource("5")]
+position = Vector2(1390, 690)
+destination = 2
+spawn_name = &"Entrance"
+direction = 1.0
+[node name="Down" parent="Exits" instance=ExtResource("5")]
+position = Vector2(730, 795)
+rotation = 1.5707964
+arrow_offset = Vector2(-90, 0)
+destination = 4
+spawn_name = &"Entrance"

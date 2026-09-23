@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3]
+[ext_resource type="PackedScene" path="res://player/player.tscn" id="1"]
+[sub_resource type="RectangleShape2D" id="Floor"]
+size = Vector2(1000, 60)
+[node name="MovementLab" type="Node2D"]
+[node name="Player" parent="." instance=ExtResource("1")]
+position = Vector2(300, 560)
+[node name="Floor" type="StaticBody2D" parent="."]
+position = Vector2(500, 590)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
+shape = SubResource("Floor")
+[node name="Polygon2D" type="Polygon2D" parent="Floor"]
+polygon = PackedVector2Array(-500, -30, 500, -30, 500, 30, -500, 30)
+color = Color(0.17, 0.23, 0.3, 1)
+[node name="Instructions" type="Label" parent="."]
+offset_left = 32.0
+offset_top = 32.0
+text = "MOVEMENT LAB\nA / D or left stick / D-pad: move    Space / South: jump\nRun off the edge to experiment with coyote time. F6 runs this scene."

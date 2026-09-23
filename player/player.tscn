@@ -1,0 +1,81 @@
+[gd_scene load_steps=21 format=3]
+[ext_resource type="Script" path="res://player/player.gd" id="1"]
+[ext_resource type="Resource" path="res://resources/player_movement.tres" id="2"]
+[ext_resource type="Script" path="res://effects/actor_visual.gd" id="3"]
+[ext_resource type="Script" path="res://components/health_component.gd" id="4"]
+[ext_resource type="Script" path="res://components/hurtbox_component.gd" id="5"]
+[ext_resource type="Script" path="res://components/hitbox_component.gd" id="6"]
+[ext_resource type="Resource" path="res://resources/player_attack.tres" id="7"]
+[ext_resource type="Script" path="res://components/state_machine.gd" id="fsm"]
+[ext_resource type="Script" path="res://player/states/grounded.gd" id="grounded"]
+[ext_resource type="Script" path="res://player/states/airborne.gd" id="airborne"]
+[ext_resource type="Script" path="res://player/states/hurt.gd" id="hurt"]
+[ext_resource type="Script" path="res://player/states/dead.gd" id="dead"]
+[ext_resource type="Script" path="res://player/states/attack_ready.gd" id="attack_ready"]
+[ext_resource type="Script" path="res://player/states/attack_startup.gd" id="attack_startup"]
+[ext_resource type="Script" path="res://player/states/attack_active.gd" id="attack_active"]
+[ext_resource type="Script" path="res://player/states/attack_recovery.gd" id="attack_recovery"]
+[ext_resource type="Script" path="res://player/states/attack_disabled.gd" id="attack_disabled"]
+[sub_resource type="RectangleShape2D" id="Body"]
+size = Vector2(24, 40)
+[sub_resource type="RectangleShape2D" id="Hurt"]
+size = Vector2(24, 38)
+[sub_resource type="RectangleShape2D" id="Hit"]
+size = Vector2(48, 42)
+[node name="Player" type="CharacterBody2D" groups=["player"]]
+collision_layer = 2
+collision_mask = 1
+floor_snap_length = 6.0
+script = ExtResource("1")
+movement = ExtResource("2")
+[node name="Body" type="CollisionShape2D" parent="."]
+position = Vector2(0, -20)
+shape = SubResource("Body")
+[node name="Visual" type="Node2D" parent="."]
+script = ExtResource("3")
+[node name="Health" type="Node" parent="."]
+script = ExtResource("4")
+max_health = 6
+invulnerability_duration = 0.85
+[node name="Hurtbox" type="Area2D" parent="."]
+position = Vector2(0, -20)
+collision_layer = 8
+collision_mask = 0
+monitoring = false
+script = ExtResource("5")
+[node name="Shape" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("Hurt")
+[node name="Hitbox" type="Area2D" parent="."]
+position = Vector2(34, -23)
+collision_layer = 0
+collision_mask = 16
+monitorable = false
+script = ExtResource("6")
+attack = ExtResource("7")
+[node name="Shape" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("Hit")
+
+
+[node name="Motion" type="Node" parent="."]
+script = ExtResource("fsm")
+[node name="Grounded" type="Node" parent="Motion"]
+script = ExtResource("grounded")
+[node name="Airborne" type="Node" parent="Motion"]
+script = ExtResource("airborne")
+[node name="Hurt" type="Node" parent="Motion"]
+script = ExtResource("hurt")
+[node name="Dead" type="Node" parent="Motion"]
+script = ExtResource("dead")
+
+[node name="Attack" type="Node" parent="."]
+script = ExtResource("fsm")
+[node name="Ready" type="Node" parent="Attack"]
+script = ExtResource("attack_ready")
+[node name="Startup" type="Node" parent="Attack"]
+script = ExtResource("attack_startup")
+[node name="Active" type="Node" parent="Attack"]
+script = ExtResource("attack_active")
+[node name="Recovery" type="Node" parent="Attack"]
+script = ExtResource("attack_recovery")
+[node name="Disabled" type="Node" parent="Attack"]
+script = ExtResource("attack_disabled")

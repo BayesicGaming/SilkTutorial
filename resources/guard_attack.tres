@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="AttackData" load_steps=2 format=3]
+[ext_resource type="Script" path="res://resources/attack_data.gd" id="1"]
+[resource]
+script = ExtResource("1")
+startup = 0.55
+active_time = 0.16
+recovery = 0.70
+knockback = 280.0
+knockback_lift = 150.0

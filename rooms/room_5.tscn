@@ -1,0 +1,54 @@
+[gd_scene load_steps=6 format=3]
+[ext_resource type="Script" path="res://rooms/room.gd" id="1"]
+[ext_resource type="PackedScene" path="res://rooms/platform.tscn" id="2"]
+[ext_resource type="PackedScene" path="res://player/player.tscn" id="3"]
+[ext_resource type="PackedScene" path="res://interactables/room_exit.tscn" id="4"]
+[ext_resource type="PackedScene" path="res://interactables/key.tscn" id="5"]
+[node name="Room5" type="Node2D"]
+script = ExtResource("1")
+room_title = "05 / LANTERN WELL"
+room_hint = "The ember key rests at the bottom. Hold jump and climb the alternating ledges to the up exit."
+room_color = Color(0.18, 0.30, 0.35, 1)
+[node name="Geometry" type="Node2D" parent="."]
+[node name="Floor" parent="Geometry" instance=ExtResource("2")]
+position = Vector2(0, 740)
+size = Vector2(1440, 70)
+[node name="LeftWall" parent="Geometry" instance=ExtResource("2")]
+position = Vector2(-40, 0)
+size = Vector2(40, 810)
+[node name="RightWall" parent="Geometry" instance=ExtResource("2")]
+position = Vector2(1440, 0)
+size = Vector2(40, 810)
+[node name="Ledge1" parent="Geometry" instance=ExtResource("2")]
+position = Vector2(460, 650)
+size = Vector2(180, 24)
+[node name="Ledge2" parent="Geometry" instance=ExtResource("2")]
+position = Vector2(720, 570)
+size = Vector2(180, 24)
+[node name="Ledge3" parent="Geometry" instance=ExtResource("2")]
+position = Vector2(460, 490)
+size = Vector2(180, 24)
+[node name="Ledge4" parent="Geometry" instance=ExtResource("2")]
+position = Vector2(720, 410)
+size = Vector2(180, 24)
+[node name="Ledge5" parent="Geometry" instance=ExtResource("2")]
+position = Vector2(460, 330)
+size = Vector2(180, 24)
+[node name="Ledge6" parent="Geometry" instance=ExtResource("2")]
+position = Vector2(720, 250)
+size = Vector2(180, 24)
+[node name="Spawns" type="Node2D" parent="."]
+[node name="Entrance" type="Marker2D" parent="Spawns"]
+position = Vector2(800, 250)
+[node name="Player" parent="." instance=ExtResource("3")]
+position = Vector2(800, 250)
+[node name="Enemies" type="Node2D" parent="."]
+[node name="Exits" type="Node2D" parent="."]
+[node name="Up" parent="Exits" instance=ExtResource("4")]
+position = Vector2(800, 125)
+rotation = -1.5707964
+arrow_offset = Vector2(-45, 0)
+destination = 1
+spawn_name = &"FromWell"
+[node name="Key" parent="." instance=ExtResource("5")]
+position = Vector2(1030, 707)

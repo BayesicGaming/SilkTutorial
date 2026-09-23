@@ -1,0 +1,56 @@
+.godot/
+.import/
+~*.dll
+.nomedia
+logs/
+tests/artifacts/
+
+# Local editor and operating-system files
+.vscode/
+.idea/
+.vs/
+.fleet/
+.history/
+.DS_Store
+Thumbs.db
+Desktop.ini
+*.code-workspace
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.swp
+*.tmp
+*.bak
+*~
+
+# Local secrets and signing credentials
+.env
+.env.*
+.envrc
+export.cfg
+!.env.example
+override.cfg
+export_credentials.cfg
+*.pem
+*.key
+*.p12
+*.pfx
+*.keystore
+*.jks
+credentials*.json
+secrets*.json
+
+# Local exports
+builds/
+exports/
+
+# Logs and crash reports can contain local filesystem paths
+*.log
+crash*.txt
+
+*.translation
+
+.mono/
+data_*/
+mono_crash.*.json

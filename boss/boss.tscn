@@ -1,0 +1,74 @@
+[gd_scene load_steps=19 format=3]
+[ext_resource type="Script" path="res://boss/boss.gd" id="1"]
+[ext_resource type="Script" path="res://effects/actor_visual.gd" id="2"]
+[ext_resource type="Script" path="res://components/health_component.gd" id="3"]
+[ext_resource type="Script" path="res://components/hurtbox_component.gd" id="4"]
+[ext_resource type="Script" path="res://components/hitbox_component.gd" id="5"]
+[ext_resource type="Resource" path="res://resources/boss_sweep.tres" id="6"]
+[ext_resource type="Script" path="res://components/state_machine.gd" id="fsm"]
+[ext_resource type="Script" path="res://boss/states/idle.gd" id="Idle"]
+[ext_resource type="Script" path="res://boss/states/windup.gd" id="Windup"]
+[ext_resource type="Script" path="res://boss/states/sweep.gd" id="Sweep"]
+[ext_resource type="Script" path="res://boss/states/leap.gd" id="Leap"]
+[ext_resource type="Script" path="res://boss/states/fall.gd" id="Fall"]
+[ext_resource type="Script" path="res://boss/states/impact.gd" id="Impact"]
+[ext_resource type="Script" path="res://boss/states/charge.gd" id="Charge"]
+[ext_resource type="Script" path="res://boss/states/recovery.gd" id="Recovery"]
+[ext_resource type="Script" path="res://boss/states/dead.gd" id="Dead"]
+[sub_resource type="RectangleShape2D" id="Body"]
+size = Vector2(62, 86)
+[sub_resource type="RectangleShape2D" id="Hit"]
+resource_local_to_scene = true
+size = Vector2(110, 50)
+[node name="Boss" type="CharacterBody2D" groups=["enemies"]]
+collision_layer = 4
+collision_mask = 1
+script = ExtResource("1")
+[node name="Body" type="CollisionShape2D" parent="."]
+position = Vector2(0, -43)
+shape = SubResource("Body")
+[node name="Visual" type="Node2D" parent="."]
+script = ExtResource("2")
+kind = "boss"
+[node name="Health" type="Node" parent="."]
+script = ExtResource("3")
+max_health = 24
+[node name="Hurtbox" type="Area2D" parent="."]
+position = Vector2(0, -43)
+collision_layer = 16
+collision_mask = 0
+monitoring = false
+script = ExtResource("4")
+[node name="Shape" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("Body")
+[node name="Hitbox" type="Area2D" parent="."]
+position = Vector2(-78, -25)
+collision_layer = 0
+collision_mask = 8
+monitorable = false
+script = ExtResource("5")
+attack = ExtResource("6")
+[node name="Shape" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("Hit")
+
+
+[node name="States" type="Node" parent="."]
+script = ExtResource("fsm")
+[node name="Idle" type="Node" parent="States"]
+script = ExtResource("Idle")
+[node name="Windup" type="Node" parent="States"]
+script = ExtResource("Windup")
+[node name="Sweep" type="Node" parent="States"]
+script = ExtResource("Sweep")
+[node name="Leap" type="Node" parent="States"]
+script = ExtResource("Leap")
+[node name="Fall" type="Node" parent="States"]
+script = ExtResource("Fall")
+[node name="Impact" type="Node" parent="States"]
+script = ExtResource("Impact")
+[node name="Charge" type="Node" parent="States"]
+script = ExtResource("Charge")
+[node name="Recovery" type="Node" parent="States"]
+script = ExtResource("Recovery")
+[node name="Dead" type="Node" parent="States"]
+script = ExtResource("Dead")
