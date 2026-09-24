@@ -22,7 +22,9 @@ Head right from Room 1 into Room 2, the crossroads. Its right exit leads to Room
 
 ## Learn
 
-Start with [the learning guide](docs/LEARNING_GUIDE.md). It walks through this project's actual code, scene trees, tuning, signals, damage flow, and 18 exercises, including an outline for adding double jump yourself.
+To recreate the game from a small movement prototype through combat, rooms, progression, the boss, and final verification, start with [Building Cinder Thread in stages](docs/BUILDING_IN_STAGES.md). Every stage identifies a playable checkpoint, focused tests, the reason for the chosen design, and credible alternatives.
+
+Use [the learning guide](docs/LEARNING_GUIDE.md) beside it as the detailed tour of the finished code. It covers the actual scene trees, tuning, signals, damage flow, and 18 exercises, including an outline for adding double jump yourself.
 
 The first five things to inspect are:
 

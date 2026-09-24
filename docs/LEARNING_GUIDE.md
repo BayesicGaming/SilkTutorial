@@ -2,6 +2,8 @@
 
 This guide describes the files in this project, not a hypothetical architecture. Open **project.godot**, press **F5**, and play before trying to understand every line. Your first useful experiment is changing one movement value, replaying the movement lab, and noticing the difference.
 
+If you want a construction sequence rather than a tour of the completed project, use [Building Cinder Thread in stages](BUILDING_IN_STAGES.md). It introduces the systems in playable milestones, pairs each milestone with focused tests, and discusses why this project chose one design over its alternatives.
+
 Paths below begin at the project root; Godot calls that location **res://**. Godot's Inspector exposes fields marked **@export**. A script's default is used unless a scene or Resource overrides it.
 
 ## 1. Mental model
